@@ -7,8 +7,8 @@ import ShoppingMall from '@/components/pages/ShoppingMall'
 // Vue.use(Vant)
 
 // 按需引入vant，使用babel-plugin-import插件
-import {Button, Row, Col} from 'vant'
-Vue.use(Router).use(Button).use(Row).use(Col)
+import {Button, Row, Col, Swipe, SwipeItem, Lazyload} from 'vant'
+Vue.use(Router).use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload)
 
 export default new Router({
   routes: [
