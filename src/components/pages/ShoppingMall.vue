@@ -51,6 +51,12 @@
         </swiper>
       </div>
     </div>
+
+    <!-- vue-awesome-swiper demo -->
+    <swiperDefault></swiperDefault>
+    <swiperDefault2></swiperDefault2>
+    <swiperDefault3></swiperDefault3>
+    <swiperText></swiperText>
   </div>
 </template>
 
@@ -58,6 +64,11 @@
   import axios from 'axios'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import 'swiper/dist/css/swiper.css'
+
+  import swiperDefault from '../swiper/swiperDefault'
+  import swiperDefault2 from '../swiper/swiperDefault2'
+  import swiperDefault3 from '../swiper/swiperDefault3'
+  import swiperText from '../swiper/swiperText'
 
   export default {
     data() {
@@ -73,10 +84,7 @@
         'recommendGoods': []
       }
     },
-    components: {
-      swiper,
-      swiperSlide
-    },
+    components: {swiper, swiperSlide, swiperDefault, swiperDefault2, swiperDefault3, swiperText},
     created() {
       axios({
         url: 'https://www.easy-mock.com/mock/5b58608afce1393a862d031b/index/index',
