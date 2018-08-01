@@ -35,21 +35,47 @@
     <div>
       <img v-lazy="adBanner" width="100%">
     </div>
+
+    <!-- recommend goods area -->
+    <div class="recommend-area">
+      <div class="recommend-title">
+        商品推荐
+      </div>
+      <div class="recommend-body">
+        <swiper :options="swiperOption">
+          <swiper-slide v-for="(item, index) in recommendGoods" :key="index" class="recommend-item">
+            <img :src="item.image" alt="暂无图片" width="80%">
+            <div>{{item.goodsName}}</div>
+            <div>￥{{item.price}}(￥{{item.mallPrice}})</div>
+          </swiper-slide>
+        </swiper>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
   import axios from 'axios'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import 'swiper/dist/css/swiper.css'
 
   export default {
     data() {
       return {
+        'swiperOption': {
+          slidesPerView: 3
+        },
         'msg': 'Shopping mall',
         'locationIcon': require('../../assets/images/location.png'),
         'bannerPicArray': [],
         'category': [],
-        'adBanner': ''
+        'adBanner': '',
+        'recommendGoods': []
       }
+    },
+    components: {
+      swiper,
+      swiperSlide
     },
     created() {
       axios({
@@ -62,6 +88,7 @@
           this.bannerPicArray = response.data.data.slides;
           this.category = response.data.data.category;
           this.adBanner = response.data.data.advertesPicture.PICTURE_ADDRESS;
+          this.recommendGoods = response.data.data.recommend;
         }
       })
       .catch(error => {
@@ -109,6 +136,26 @@
 .type-bar div {
   flex: 1;
   padding: .3rem;
+  font-size: 12px;
+  text-align: center;
+}
+
+.recommend-area {
+  background-color: #fff;
+  margin-top: .3rem;
+}
+.recommend-title {
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  padding: .2rem;
+  color: #e5017d;
+}
+.recommend-body {
+  border-bottom: 1px solid #eee;
+}
+.recommend-item {
+  width: 99%;
+  border-right: 1px solid #eee;
   font-size: 12px;
   text-align: center;
 }
