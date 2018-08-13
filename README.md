@@ -11,6 +11,9 @@ user-scaleable = no; 禁止用户手动缩放
 2、swiper的分页器可以自由选择
 3、无限循环
 
+增加filter方法（moneyFilter.js）
+增加商品信息组件（goodsInfoComponent.vue）
+
 
 ## Build Setup
 

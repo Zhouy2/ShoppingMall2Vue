@@ -46,7 +46,7 @@
           <swiper-slide v-for="(item, index) in recommendGoods" :key="index" class="recommend-item">
             <img :src="item.image" alt="暂无图片" width="80%">
             <div>{{item.goodsName}}</div>
-            <div>￥{{item.price}}(￥{{item.mallPrice}})</div>
+            <div>￥{{item.price | moneyFilter}}(￥{{item.mallPrice | moneyFilter}})</div>
           </swiper-slide>
         </swiper>
       </div>
@@ -62,6 +62,21 @@
     <floorComponent :floorData="floor1" :floorTitle="floorName.floor1"></floorComponent>
     <floorComponent :floorData="floor2" :floorTitle="floorName.floor2"></floorComponent>
     <floorComponent :floorData="floor3" :floorTitle="floorName.floor3"></floorComponent>
+
+    <!-- hot area -->
+    <div class="hot-area">
+      <div class="hot-title">热卖商品</div>
+      <div class="hot-goods">
+        <!-- list组件 -->
+        <van-list>
+          <van-row gutter="20">
+            <van-col span="12" v-for="(item, index) in hotGoods" :key="index">
+              <goodsInfoComponent :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price"></goodsInfoComponent>
+            </van-col>
+          </van-row>
+        </van-list>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -76,6 +91,8 @@
   // import swiperText from '../swiper/swiperText'
 
   import floorComponent from '../component/floorComponent'
+  import goodsInfoComponent from '../component/goodsInfoComponent'
+  import {toMoney} from '@/filter/moneyFilter.js'
 
   export default {
     data() {
@@ -92,11 +109,17 @@
         'floor1': [],
         'floor2': [],
         'floor3': [],
-        'floorName': {}
+        'floorName': {},
+        'hotGoods': [], // 热卖商品
       }
     },
     // components: {swiper, swiperSlide, swiperDefault, swiperDefault2, swiperDefault3, swiperText},
-    components: {swiper, swiperSlide, floorComponent},
+    components: {swiper, swiperSlide, floorComponent, goodsInfoComponent},
+    filters: {
+      moneyFilter(money) {
+        return toMoney(money);
+      }
+    },
     created() {
       axios({
         url: 'https://www.easy-mock.com/mock/5b58608afce1393a862d031b/index/index',
@@ -113,6 +136,7 @@
           this.floor2 = response.data.data.floor2;
           this.floor3 = response.data.data.floor3;
           this.floorName = response.data.data.floorName;
+          this.hotGoods = response.data.data.hotGoods;
         }
       })
       .catch(error => {
@@ -182,5 +206,13 @@
   border-right: 1px solid #eee;
   font-size: 12px;
   text-align: center;
+}
+
+/* hot area */
+.hot-area {
+  text-align: center;
+  font-size: 14px;
+  height: 1.8rem;
+  line-height: 1.8rem;
 }
 </style>
