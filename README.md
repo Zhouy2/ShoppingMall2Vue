@@ -6,7 +6,10 @@ user-scaleable = no; 禁止用户手动缩放
 图片懒加载：Lazyload
 了解easy-mock的使用（https://www.easy-mock.com）
 使用axios调取接口数据
-使用插件vue-awesome-swiper
+使用插件vue-awesome-swiper：
+1、swiper的区域滚动效果
+2、swiper的分页器可以自由选择
+3、无限循环
 
 
 ## Build Setup

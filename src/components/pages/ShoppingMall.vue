@@ -53,10 +53,15 @@
     </div>
 
     <!-- vue-awesome-swiper demo -->
-    <swiperDefault></swiperDefault>
+    <!-- <swiperDefault></swiperDefault>
     <swiperDefault2></swiperDefault2>
     <swiperDefault3></swiperDefault3>
-    <swiperText></swiperText>
+    <swiperText></swiperText> -->
+
+    <!-- floor area -->
+    <floorComponent :floorData="floor1" :floorTitle="floorName.floor1"></floorComponent>
+    <floorComponent :floorData="floor2" :floorTitle="floorName.floor2"></floorComponent>
+    <floorComponent :floorData="floor3" :floorTitle="floorName.floor3"></floorComponent>
   </div>
 </template>
 
@@ -65,10 +70,12 @@
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import 'swiper/dist/css/swiper.css'
 
-  import swiperDefault from '../swiper/swiperDefault'
-  import swiperDefault2 from '../swiper/swiperDefault2'
-  import swiperDefault3 from '../swiper/swiperDefault3'
-  import swiperText from '../swiper/swiperText'
+  // import swiperDefault from '../swiper/swiperDefault'
+  // import swiperDefault2 from '../swiper/swiperDefault2'
+  // import swiperDefault3 from '../swiper/swiperDefault3'
+  // import swiperText from '../swiper/swiperText'
+
+  import floorComponent from '../component/floorComponent'
 
   export default {
     data() {
@@ -81,10 +88,15 @@
         'bannerPicArray': [],
         'category': [],
         'adBanner': '',
-        'recommendGoods': []
+        'recommendGoods': [],
+        'floor1': [],
+        'floor2': [],
+        'floor3': [],
+        'floorName': {}
       }
     },
-    components: {swiper, swiperSlide, swiperDefault, swiperDefault2, swiperDefault3, swiperText},
+    // components: {swiper, swiperSlide, swiperDefault, swiperDefault2, swiperDefault3, swiperText},
+    components: {swiper, swiperSlide, floorComponent},
     created() {
       axios({
         url: 'https://www.easy-mock.com/mock/5b58608afce1393a862d031b/index/index',
@@ -97,6 +109,10 @@
           this.category = response.data.data.category;
           this.adBanner = response.data.data.advertesPicture.PICTURE_ADDRESS;
           this.recommendGoods = response.data.data.recommend;
+          this.floor1 = response.data.data.floor1;
+          this.floor2 = response.data.data.floor2;
+          this.floor3 = response.data.data.floor3;
+          this.floorName = response.data.data.floorName;
         }
       })
       .catch(error => {
